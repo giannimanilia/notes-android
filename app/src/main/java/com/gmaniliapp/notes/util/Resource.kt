@@ -1,18 +1,18 @@
 package com.gmaniliapp.notes.util
 
-data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+data class Resource<out T>(val status: Status, val data: T?) {
 
     companion object {
         fun <T> success(data: T?): Resource<T> {
-            return Resource(Status.SUCCESS, data, null)
+            return Resource(Status.SUCCESS, data)
         }
 
-        fun <T> error(msg: String, data: T?): Resource<T> {
-            return Resource(Status.ERROR, data, msg)
+        fun <T> error(data: T?): Resource<T> {
+            return Resource(Status.ERROR, data)
         }
 
         fun <T> loading(data: T?): Resource<T> {
-            return Resource(Status.LOADING, data, null)
+            return Resource(Status.LOADING, data)
         }
     }
 }
