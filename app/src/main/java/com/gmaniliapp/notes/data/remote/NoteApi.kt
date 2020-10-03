@@ -19,7 +19,7 @@ interface NoteApi {
     @POST("/rest/v1/auth/login")
     suspend fun login(
         @Body request: AccountRequest
-    ): Response<ResponseBody>
+    ): Response<StandardResponse>
 
     @POST("/rest/v1/notes")
     suspend fun createNote(
