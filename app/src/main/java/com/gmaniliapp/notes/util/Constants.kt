@@ -6,6 +6,10 @@ object Constants {
 
     const val DATABASE_NAME = "NOTES_APP"
 
+    const val DEFAULT_NO_EMAIL = "DEFAULT_NO_EMAIL"
+
+    const val DEFAULT_NO_PASSWORD = "DEFAULT_NO_PASSWORD"
+
     const val ENCRYPTED_SHARED_PREFERENCES_NAME = "encrypted_shared_preferences"
 
     const val KEY_LOGGED_IN_EMAIL = "KEY_LOGGED_IN_EMAIL"

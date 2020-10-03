@@ -8,7 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gmaniliapp.notes.data.remote.BasicAuthInterceptor
 import com.gmaniliapp.notes.data.repository.NoteRepository
-import com.gmaniliapp.notes.util.Constants
+import com.gmaniliapp.notes.util.Constants.DEFAULT_NO_EMAIL
+import com.gmaniliapp.notes.util.Constants.DEFAULT_NO_PASSWORD
+import com.gmaniliapp.notes.util.Constants.KEY_LOGGED_IN_EMAIL
+import com.gmaniliapp.notes.util.Constants.KEY_LOGGED_IN_PASSWORD
 import com.gmaniliapp.notes.util.Resource
 import com.gmaniliapp.notes.util.Status
 import kotlinx.coroutines.launch
@@ -26,13 +29,8 @@ class AuthViewModel @ViewModelInject constructor(
     private val _loginStatus = MutableLiveData<Resource<String>>()
     val loginStatus: LiveData<Resource<String>> = _loginStatus
 
-    private var currentEmail: String? = null
-    private var currentPassword: String? = null
-
-    fun authenticateApi(email: String, password: String) {
-        basicAuthInterceptor.email = email
-        basicAuthInterceptor.password = password
-    }
+    private var currentEmail: String? = DEFAULT_NO_EMAIL
+    private var currentPassword: String? = DEFAULT_NO_PASSWORD
 
     fun register(email: String, password: String, repeatedPassword: String) {
         _registerStatus.postValue(Resource.loading(null))
@@ -62,12 +60,15 @@ class AuthViewModel @ViewModelInject constructor(
                 result.let {
                     when (result.status) {
                         Status.SUCCESS -> {
-                            authenticateApi(email, password)
+                            currentEmail = email
+                            currentPassword = password
+
+                            authenticateApi()
 
                             sharedPreferences.edit()
-                                .putString(Constants.KEY_LOGGED_IN_EMAIL, currentEmail).apply()
+                                .putString(KEY_LOGGED_IN_EMAIL, currentEmail).apply()
                             sharedPreferences.edit()
-                                .putString(Constants.KEY_LOGGED_IN_PASSWORD, currentPassword)
+                                .putString(KEY_LOGGED_IN_PASSWORD, currentPassword)
                                 .apply()
                         }
                         Status.ERROR -> {
@@ -78,5 +79,18 @@ class AuthViewModel @ViewModelInject constructor(
                 }
             }
         }
+    }
+
+    fun authenticateApi() {
+        basicAuthInterceptor.email = currentEmail
+        basicAuthInterceptor.password = currentPassword
+    }
+
+    fun isLoggedIn(): Boolean {
+        currentEmail =
+            sharedPreferences.getString(KEY_LOGGED_IN_EMAIL, DEFAULT_NO_EMAIL) ?: DEFAULT_NO_EMAIL
+        currentPassword = sharedPreferences.getString(KEY_LOGGED_IN_PASSWORD, DEFAULT_NO_PASSWORD)
+            ?: DEFAULT_NO_PASSWORD
+        return currentEmail != DEFAULT_NO_EMAIL && currentPassword != DEFAULT_NO_PASSWORD
     }
 }

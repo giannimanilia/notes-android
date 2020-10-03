@@ -21,6 +21,11 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (viewModel.isLoggedIn()) {
+            onLoginRedirect()
+            viewModel.authenticateApi()
+        }
+
         requireActivity().requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
         subscribeToObservers()
