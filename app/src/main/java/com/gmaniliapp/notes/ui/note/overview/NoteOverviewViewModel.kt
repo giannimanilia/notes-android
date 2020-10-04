@@ -2,16 +2,16 @@ package com.gmaniliapp.notes.ui.note.overview
 
 import android.content.SharedPreferences
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.gmaniliapp.notes.data.local.entities.Note
 import com.gmaniliapp.notes.data.remote.BasicAuthInterceptor
 import com.gmaniliapp.notes.data.repository.NoteRepository
-import com.gmaniliapp.notes.util.Constants
 import com.gmaniliapp.notes.util.Constants.DEFAULT_NO_EMAIL
 import com.gmaniliapp.notes.util.Constants.DEFAULT_NO_PASSWORD
 import com.gmaniliapp.notes.util.Constants.KEY_LOGGED_IN_EMAIL
 import com.gmaniliapp.notes.util.Constants.KEY_LOGGED_IN_PASSWORD
+import com.gmaniliapp.notes.util.Event
+import com.gmaniliapp.notes.util.Resource
 
 class NoteOverviewViewModel @ViewModelInject constructor(
     private val repository: NoteRepository,
@@ -22,6 +22,15 @@ class NoteOverviewViewModel @ViewModelInject constructor(
     private val _navigateToLogout = MutableLiveData<Boolean>()
     val navigateToLogout: LiveData<Boolean>
         get() = _navigateToLogout
+
+    private val _forceUpdate = MutableLiveData<Boolean>(false)
+
+    private val _allNotes = _forceUpdate.switchMap {
+        repository.getAllNotes().asLiveData(viewModelScope.coroutineContext)
+    }.switchMap {
+        MutableLiveData(Event(it))
+    }
+    val allNotes: LiveData<Event<Resource<List<Note>>>> = _allNotes
 
     private fun displayLogout() {
         _navigateToLogout.value = true
@@ -40,4 +49,6 @@ class NoteOverviewViewModel @ViewModelInject constructor(
     fun displayLogoutCompleted() {
         _navigateToLogout.value = false
     }
+
+    fun syncNotes() = _forceUpdate.postValue(true)
 }

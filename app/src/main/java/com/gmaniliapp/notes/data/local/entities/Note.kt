@@ -17,5 +17,5 @@ data class Note(
     val color: String,
     @Expose(deserialize = false, serialize = false)
     @ColumnInfo(name = "is_sync")
-    val isSync: Boolean = false
+    var isSync: Boolean = false
 )
