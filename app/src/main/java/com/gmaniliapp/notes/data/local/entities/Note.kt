@@ -10,8 +10,8 @@ import java.util.*
 data class Note(
     @PrimaryKey
     val id: String = UUID.randomUUID().toString(),
-    val title: String,
-    val content: String,
+    var title: String,
+    var content: String,
     val date: Long,
     val owners: List<String>,
     val color: String,

@@ -26,6 +26,11 @@ interface NoteApi {
         @Body note: Note
     ): Response<ResponseBody>
 
+    @PUT("/rest/v1/notes")
+    suspend fun updateNote(
+        @Body note: Note
+    ): Response<ResponseBody>
+
     @DELETE("/rest/v1/notes")
     suspend fun deleteNote(
         @Body request: DeleteNoteRequest

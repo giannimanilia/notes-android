@@ -78,7 +78,7 @@ class NoteRepository @Inject constructor(
             },
             saveFetchResult = { response ->
                 response.body()?.let {
-                    insertNotes(it)
+                    syncNotes(it)
                 }
             },
             shouldFetch = {
@@ -101,8 +101,22 @@ class NoteRepository @Inject constructor(
         }
     }
 
-    suspend fun insertNotes(notes: List<Note>) {
-        notes.forEach { insertNote(it) }
+    private suspend fun syncNotes(notes: List<Note>) {
+        notes.forEach { updateNote(it) }
+    }
+
+    suspend fun updateNote(note: Note) {
+        val response = try {
+            noteApi.updateNote(note)
+        } catch (e: Exception) {
+            null
+        }
+
+        if (response != null && response.isSuccessful) {
+            noteDAO.insertNote(note.apply { isSync = true })
+        } else {
+            noteDAO.insertNote(note)
+        }
     }
 
     suspend fun selectNoteById(noteId: String) = noteDAO.selectNoteById(noteId)

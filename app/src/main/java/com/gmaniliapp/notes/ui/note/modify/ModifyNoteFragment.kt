@@ -97,16 +97,20 @@ class ModifyNoteFragment : BaseFragment(R.layout.fragment_modify_note) {
             return
         }
 
-        viewModel.insertNote(
-            Note(
-                id = currentNote?.id ?: UUID.randomUUID().toString(),
-                title = title,
-                content = content,
-                date = System.currentTimeMillis(),
-                color = currentNoteColor,
-                owners = currentNote?.owners ?: listOf(viewModel.getLoggedInEmail())
-            )
+        val note = Note(
+            id = currentNote?.id ?: UUID.randomUUID().toString(),
+            title = title,
+            content = content,
+            date = System.currentTimeMillis(),
+            color = currentNoteColor,
+            owners = currentNote?.owners ?: listOf(viewModel.getLoggedInEmail())
         )
+
+        if (currentNote != null) {
+            viewModel.updateNote(note)
+        } else {
+            viewModel.insertNote(note)
+        }
     }
 
     private fun changeViewNoteColor(colorString: String) {

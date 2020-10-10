@@ -26,6 +26,10 @@ class ModifyNoteViewModel @ViewModelInject constructor(
         get() = _note
 
     fun insertNote(note: Note) = GlobalScope.launch {
+        repository.insertNote(note)
+    }
+
+    fun updateNote(note: Note) = GlobalScope.launch {
         repository.updateNote(note)
     }
 
