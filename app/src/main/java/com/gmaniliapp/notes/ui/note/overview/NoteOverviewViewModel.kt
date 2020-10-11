@@ -12,6 +12,7 @@ import com.gmaniliapp.notes.util.Constants.KEY_LOGGED_IN_EMAIL
 import com.gmaniliapp.notes.util.Constants.KEY_LOGGED_IN_PASSWORD
 import com.gmaniliapp.notes.util.Event
 import com.gmaniliapp.notes.util.Resource
+import kotlinx.coroutines.launch
 
 class NoteOverviewViewModel @ViewModelInject constructor(
     private val repository: NoteRepository,
@@ -51,4 +52,8 @@ class NoteOverviewViewModel @ViewModelInject constructor(
     }
 
     fun syncNotes() = _forceUpdate.postValue(true)
+
+    fun deleteNoteById(noteId: String) = viewModelScope.launch {
+        repository.deleteNoteById(noteId)
+    }
 }

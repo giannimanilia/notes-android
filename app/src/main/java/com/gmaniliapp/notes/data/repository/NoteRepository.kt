@@ -5,6 +5,7 @@ import com.gmaniliapp.notes.data.local.dao.NoteDAO
 import com.gmaniliapp.notes.data.local.entities.Note
 import com.gmaniliapp.notes.data.remote.NoteApi
 import com.gmaniliapp.notes.data.remote.request.AccountRequest
+import com.gmaniliapp.notes.data.remote.request.DeleteNoteRequest
 import com.gmaniliapp.notes.data.remote.response.StandardResponse
 import com.gmaniliapp.notes.util.Resource
 import com.gmaniliapp.notes.util.isInternetConnectionEnabled
@@ -68,6 +69,20 @@ class NoteRepository @Inject constructor(
         }
     }
 
+    suspend fun insertNote(note: Note) {
+        val response = try {
+            noteApi.createNote(note)
+        } catch (e: Exception) {
+            null
+        }
+
+        if (response != null && response.isSuccessful) {
+            noteDAO.insertNote(note.apply { isSync = true })
+        } else {
+            noteDAO.insertNote(note)
+        }
+    }
+
     fun getAllNotes(): Flow<Resource<List<Note>>> {
         return networkBoundResource(
             query = {
@@ -87,23 +102,7 @@ class NoteRepository @Inject constructor(
         )
     }
 
-    suspend fun insertNote(note: Note) {
-        val response = try {
-            noteApi.createNote(note)
-        } catch (e: Exception) {
-            null
-        }
-
-        if (response != null && response.isSuccessful) {
-            noteDAO.insertNote(note.apply { isSync = true })
-        } else {
-            noteDAO.insertNote(note)
-        }
-    }
-
-    private suspend fun syncNotes(notes: List<Note>) {
-        notes.forEach { updateNote(it) }
-    }
+    suspend fun selectNoteById(noteId: String) = noteDAO.selectNoteById(noteId)
 
     suspend fun updateNote(note: Note) {
         val response = try {
@@ -119,5 +118,22 @@ class NoteRepository @Inject constructor(
         }
     }
 
-    suspend fun selectNoteById(noteId: String) = noteDAO.selectNoteById(noteId)
+    suspend fun deleteNoteById(noteId: String) {
+        val response = try {
+            noteApi.deleteNote(DeleteNoteRequest(noteId))
+        } catch (e: Exception) {
+            null
+        }
+
+        if (response != null && response.isSuccessful) {
+            noteDAO.deleteNoteById(noteId)
+        } else {
+            noteDAO.updateNoteDeletedState(noteId, true)
+        }
+    }
+
+    private suspend fun syncNotes(notes: List<Note>) {
+        notes.forEach { }
+    }
+
 }

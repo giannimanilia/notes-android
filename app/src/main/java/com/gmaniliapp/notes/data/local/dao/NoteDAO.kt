@@ -11,14 +11,12 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface NoteDAO {
 
+    /* Create */
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(note: Note)
 
-    @Query("DELETE FROM NOTE WHERE ID = :id")
-    suspend fun deleteNoteById(id: String)
-
-    @Query("DELETE FROM NOTE WHERE IS_SYNC = 1")
-    suspend fun deleteAllSyncNotes()
+    /* Read */
 
     @Query("SELECT * FROM NOTE WHERE ID = :id")
     fun observeNoteById(id: String): LiveData<Note>
@@ -31,4 +29,17 @@ interface NoteDAO {
 
     @Query("SELECT * FROM NOTE WHERE IS_SYNC = 0")
     suspend fun selectAllNotSyncNotes(): List<Note>
+
+    /* Update */
+
+    @Query("UPDATE NOTE SET DELETED = :deleted WHERE ID = :id")
+    suspend fun updateNoteDeletedState(id: String, deleted: Boolean)
+
+    /* Delete */
+
+    @Query("DELETE FROM NOTE WHERE ID = :id")
+    suspend fun deleteNoteById(id: String)
+
+    @Query("DELETE FROM NOTE WHERE IS_SYNC = 1")
+    suspend fun deleteAllSyncNotes()
 }

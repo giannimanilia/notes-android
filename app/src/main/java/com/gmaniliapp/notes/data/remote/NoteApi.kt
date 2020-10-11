@@ -31,7 +31,7 @@ interface NoteApi {
         @Body note: Note
     ): Response<ResponseBody>
 
-    @DELETE("/rest/v1/notes")
+    @HTTP(method = "DELETE", path = "/rest/v1/notes", hasBody = true)
     suspend fun deleteNote(
         @Body request: DeleteNoteRequest
     ): Response<ResponseBody>
