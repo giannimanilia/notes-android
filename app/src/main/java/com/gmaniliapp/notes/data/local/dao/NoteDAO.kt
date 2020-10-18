@@ -18,25 +18,19 @@ interface NoteDAO {
 
     /* Read */
 
-    @Query("SELECT * FROM NOTE WHERE ID = :id AND DELETED = 0")
+    @Query("SELECT * FROM NOTE WHERE ID = :id")
     fun observeNoteById(id: String): LiveData<Note>
 
-    @Query("SELECT * FROM NOTE WHERE ID = :id AND DELETED = 0")
+    @Query("SELECT * FROM NOTE WHERE ID = :id")
     suspend fun selectNoteById(id: String): Note?
 
-    @Query("SELECT * FROM NOTE WHERE DELETED = 0 ORDER BY DATE DESC")
+    @Query("SELECT * FROM NOTE ORDER BY UPDATE_DATE DESC")
     fun selectAllNotes(): Flow<List<Note>>
 
     /* Update */
-
-    @Query("UPDATE NOTE SET DELETED = :deleted WHERE ID = :id")
-    suspend fun updateNoteDeletedState(id: String, deleted: Boolean)
 
     /* Delete */
 
     @Query("DELETE FROM NOTE WHERE ID = :id")
     suspend fun deleteNoteById(id: String)
-
-    @Query("DELETE FROM NOTE WHERE DELETED = :deleted")
-    suspend fun deleteNoteByDeletedState(deleted: Boolean)
 }

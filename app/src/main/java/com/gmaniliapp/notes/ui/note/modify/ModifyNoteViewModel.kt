@@ -12,7 +12,6 @@ import com.gmaniliapp.notes.util.Constants.DEFAULT_NO_EMAIL
 import com.gmaniliapp.notes.util.Constants.KEY_LOGGED_IN_EMAIL
 import com.gmaniliapp.notes.util.Event
 import com.gmaniliapp.notes.util.Resource
-import io.ktor.utils.io.concurrent.shared
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -42,6 +41,7 @@ class ModifyNoteViewModel @ViewModelInject constructor(
     }
 
     fun getLoggedInEmail(): String {
-        return sharedPreferences.getString(KEY_LOGGED_IN_EMAIL, DEFAULT_NO_EMAIL) ?: DEFAULT_NO_EMAIL
+        return sharedPreferences.getString(KEY_LOGGED_IN_EMAIL, DEFAULT_NO_EMAIL)
+            ?: DEFAULT_NO_EMAIL
     }
 }

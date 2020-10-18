@@ -132,7 +132,7 @@ class NoteOverviewFragment : BaseFragment(R.layout.fragment_note_overview) {
         viewModel.allNotes.observe(viewLifecycleOwner, Observer {
             it?.let { event ->
                 val result = event.getContent()
-                when(result.status) {
+                when (result.status) {
                     Status.SUCCESS -> {
                         result.data?.let { notes ->
                             noteAdapter.notes = notes

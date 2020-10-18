@@ -101,9 +101,10 @@ class ModifyNoteFragment : BaseFragment(R.layout.fragment_modify_note) {
             id = currentNote?.id ?: UUID.randomUUID().toString(),
             title = title,
             content = content,
-            date = System.currentTimeMillis(),
             color = currentNoteColor,
-            owners = currentNote?.owners ?: listOf(viewModel.getLoggedInEmail())
+            owners = currentNote?.owners ?: listOf(viewModel.getLoggedInEmail()),
+            creationDate = currentNote?.creationDate ?: System.currentTimeMillis(),
+            updateDate = System.currentTimeMillis()
         )
 
         if (currentNote != null) {

@@ -57,7 +57,7 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
             tvTitle.text = note.title
 
             val dateFormat = SimpleDateFormat("dd.MM.yy, HH:mm", Locale.getDefault())
-            val dateString = dateFormat.format(note.date)
+            val dateString = dateFormat.format(note.updateDate)
             tvDate.text = dateString
 
             val drawable = ResourcesCompat.getDrawable(resources, R.drawable.circle_shape, null)
