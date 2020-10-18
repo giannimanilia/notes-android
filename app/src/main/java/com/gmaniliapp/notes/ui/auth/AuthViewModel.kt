@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gmaniliapp.notes.data.remote.BasicAuthInterceptor
-import com.gmaniliapp.notes.data.repository.NoteRepository
+import com.gmaniliapp.notes.data.repository.AuthRepository
 import com.gmaniliapp.notes.util.Constants.DEFAULT_NO_EMAIL
 import com.gmaniliapp.notes.util.Constants.DEFAULT_NO_PASSWORD
 import com.gmaniliapp.notes.util.Constants.KEY_LOGGED_IN_EMAIL
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 
 class AuthViewModel @ViewModelInject constructor(
-    private val repository: NoteRepository,
+    private val repository: AuthRepository,
     private val sharedPreferences: SharedPreferences,
     private val basicAuthInterceptor: BasicAuthInterceptor
 ) : ViewModel() {

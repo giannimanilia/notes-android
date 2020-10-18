@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.gmaniliapp.notes.data.local.NotesDatabase
+import com.gmaniliapp.notes.data.remote.AuthApi
 import com.gmaniliapp.notes.data.remote.BasicAuthInterceptor
 import com.gmaniliapp.notes.data.remote.NoteApi
 import com.gmaniliapp.notes.util.Constants.BASE_URL
@@ -55,6 +56,22 @@ object AppModule {
             .client(client)
             .build()
             .create(NoteApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuthApi(
+        basicAuthInterceptor: BasicAuthInterceptor
+    ): AuthApi {
+        val client = OkHttpClient.Builder()
+            .addInterceptor(basicAuthInterceptor)
+            .build()
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+            .create(AuthApi::class.java)
     }
 
     @Singleton

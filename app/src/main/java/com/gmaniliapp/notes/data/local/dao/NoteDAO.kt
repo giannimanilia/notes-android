@@ -18,17 +18,14 @@ interface NoteDAO {
 
     /* Read */
 
-    @Query("SELECT * FROM NOTE WHERE ID = :id")
+    @Query("SELECT * FROM NOTE WHERE ID = :id AND DELETED = 0")
     fun observeNoteById(id: String): LiveData<Note>
 
-    @Query("SELECT * FROM NOTE WHERE ID = :id")
+    @Query("SELECT * FROM NOTE WHERE ID = :id AND DELETED = 0")
     suspend fun selectNoteById(id: String): Note?
 
-    @Query("SELECT * FROM NOTE ORDER BY DATE DESC")
+    @Query("SELECT * FROM NOTE WHERE DELETED = 0 ORDER BY DATE DESC")
     fun selectAllNotes(): Flow<List<Note>>
-
-    @Query("SELECT * FROM NOTE WHERE IS_SYNC = 0")
-    suspend fun selectAllNotSyncNotes(): List<Note>
 
     /* Update */
 
@@ -40,6 +37,6 @@ interface NoteDAO {
     @Query("DELETE FROM NOTE WHERE ID = :id")
     suspend fun deleteNoteById(id: String)
 
-    @Query("DELETE FROM NOTE WHERE IS_SYNC = 1")
-    suspend fun deleteAllSyncNotes()
+    @Query("DELETE FROM NOTE WHERE DELETED = :deleted")
+    suspend fun deleteNoteByDeletedState(deleted: Boolean)
 }

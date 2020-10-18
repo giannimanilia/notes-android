@@ -55,13 +55,6 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         val note = notes[position]
         holder.itemView.apply {
             tvTitle.text = note.title
-            if (!note.isSync) {
-                ivSynced.setImageResource(R.drawable.ic_cross)
-                tvSynced.text = "Not Synced"
-            } else {
-                ivSynced.setImageResource(R.drawable.ic_check)
-                tvSynced.text = "Synced"
-            }
 
             val dateFormat = SimpleDateFormat("dd.MM.yy, HH:mm", Locale.getDefault())
             val dateString = dateFormat.format(note.date)

@@ -11,16 +11,6 @@ import retrofit2.http.*
 
 interface NoteApi {
 
-    @POST("/rest/v1/auth/register")
-    suspend fun register(
-        @Body request: AccountRequest
-    ): Response<StandardResponse>
-
-    @POST("/rest/v1/auth/login")
-    suspend fun login(
-        @Body request: AccountRequest
-    ): Response<StandardResponse>
-
     @POST("/rest/v1/notes")
     suspend fun createNote(
         @Body note: Note
@@ -29,6 +19,11 @@ interface NoteApi {
     @PUT("/rest/v1/notes")
     suspend fun updateNote(
         @Body note: Note
+    ): Response<ResponseBody>
+
+    @PUT("/rest/v1/notes/sync")
+    suspend fun syncNotes(
+        @Body notes: List<Note>
     ): Response<ResponseBody>
 
     @HTTP(method = "DELETE", path = "/rest/v1/notes", hasBody = true)
