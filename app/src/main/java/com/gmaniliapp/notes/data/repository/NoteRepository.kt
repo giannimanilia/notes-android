@@ -4,7 +4,6 @@ import android.app.Application
 import com.gmaniliapp.notes.data.local.dao.NoteDAO
 import com.gmaniliapp.notes.data.local.entities.Note
 import com.gmaniliapp.notes.data.remote.NoteApi
-import com.gmaniliapp.notes.data.remote.request.DeleteNoteRequest
 import com.gmaniliapp.notes.util.Resource
 import com.gmaniliapp.notes.util.isInternetConnectionEnabled
 import com.gmaniliapp.notes.util.networkSyncResource
@@ -56,7 +55,7 @@ class NoteRepository @Inject constructor(
 
     suspend fun updateNote(note: Note) {
         val response = try {
-            noteApi.updateNote(note)
+            noteApi.updateNote(note.id, note)
         } catch (e: Exception) {
             null
         }
@@ -70,7 +69,7 @@ class NoteRepository @Inject constructor(
 
     suspend fun deleteNoteById(noteId: String) {
         val response = try {
-            noteApi.deleteNote(DeleteNoteRequest(noteId))
+            noteApi.deleteNote(noteId)
         } catch (e: Exception) {
             null
         }
