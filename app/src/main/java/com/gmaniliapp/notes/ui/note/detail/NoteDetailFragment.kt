@@ -11,7 +11,6 @@ import com.gmaniliapp.notes.data.local.entities.Note
 import com.gmaniliapp.notes.ui.BaseFragment
 import com.gmaniliapp.notes.util.Status
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_modify_note.*
 import kotlinx.android.synthetic.main.fragment_note_detail.*
 
 @AndroidEntryPoint
