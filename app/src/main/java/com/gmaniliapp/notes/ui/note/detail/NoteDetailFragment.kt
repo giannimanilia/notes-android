@@ -64,7 +64,7 @@ class NoteDetailFragment : BaseFragment(R.layout.fragment_note_detail) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.add_owner -> showAddOwnerDialog()
         }
         return super.onOptionsItemSelected(item)
@@ -94,7 +94,7 @@ class NoteDetailFragment : BaseFragment(R.layout.fragment_note_detail) {
 
         viewModel.addOwnerStatus.observe(viewLifecycleOwner, Observer { event ->
             event?.getContentIfNotHandled()?.let { result ->
-                when(result.status) {
+                when (result.status) {
                     Status.SUCCESS -> {
                         addOwnerProgressBar.visibility = View.GONE
                         showSnackBar(result.data ?: "Successfully added owner to note")
