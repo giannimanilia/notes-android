@@ -80,6 +80,8 @@ class NoteOverviewFragment : BaseFragment(R.layout.fragment_note_overview) {
 
         subscribeToObservers()
 
+        setupSwipeRefreshLayout()
+
         noteAdapter.setOnItemClickListener {
             findNavController().navigate(
                 NoteOverviewFragmentDirections.actionNoteOverviewFragmentToNoteDetailFragment(it.id)
@@ -169,5 +171,11 @@ class NoteOverviewFragment : BaseFragment(R.layout.fragment_note_overview) {
         adapter = noteAdapter
         layoutManager = LinearLayoutManager(context)
         ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(this)
+    }
+
+    private fun setupSwipeRefreshLayout() {
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.syncNotes()
+        }
     }
 }

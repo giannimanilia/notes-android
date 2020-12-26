@@ -4,12 +4,15 @@ import android.app.Application
 import com.gmaniliapp.notes.data.local.dao.NoteDAO
 import com.gmaniliapp.notes.data.local.entities.Note
 import com.gmaniliapp.notes.data.remote.NoteApi
+import com.gmaniliapp.notes.data.remote.request.AddOwnerRequest
 import com.gmaniliapp.notes.util.Resource
 import com.gmaniliapp.notes.util.isInternetConnectionEnabled
 import com.gmaniliapp.notes.util.networkSyncResource
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import retrofit2.Response
 import javax.inject.Inject
@@ -64,6 +67,21 @@ class NoteRepository @Inject constructor(
             noteDAO.insertNote(note)
         } else {
             // TODO: Handle error response
+        }
+    }
+
+    suspend fun addOwnerToNote(owner: String, noteID: String) = withContext(Dispatchers.IO) {
+        try {
+            val response = noteApi.addOwnerToNote(noteID, AddOwnerRequest(owner))
+            if (response.isSuccessful) {
+                // TODO: Handle ok response
+                Resource.success("Ok")
+            } else {
+                // TODO: Handle error response
+                Resource.error("Error communicating with server")
+            }
+        } catch (e: Exception) {
+            Resource.error("Error communicating with server")
         }
     }
 
