@@ -1,6 +1,5 @@
 package com.gmaniliapp.notes.ui.note.detail
 
-import android.content.SharedPreferences
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

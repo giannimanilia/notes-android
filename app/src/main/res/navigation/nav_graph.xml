@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/authFragment">
 
     <fragment
         android:id="@+id/modifyNoteFragment"
         android:name="com.gmaniliapp.notes.ui.note.modify.ModifyNoteFragment"
-        android:label="ModifyNoteFragment" >
+        android:label="ModifyNoteFragment">
         <argument
             android:name="id"
             app:argType="string" />
@@ -14,7 +15,7 @@
     <fragment
         android:id="@+id/authFragment"
         android:name="com.gmaniliapp.notes.ui.auth.AuthFragment"
-        android:label="AuthFragment" >
+        android:label="AuthFragment">
         <action
             android:id="@+id/action_authFragment_to_noteOverviewFragment"
             app:destination="@id/noteOverviewFragment" />
@@ -22,7 +23,7 @@
     <fragment
         android:id="@+id/noteDetailFragment"
         android:name="com.gmaniliapp.notes.ui.note.detail.NoteDetailFragment"
-        android:label="NoteDetailFragment" >
+        android:label="NoteDetailFragment">
         <action
             android:id="@+id/action_noteDetailFragment_to_modifyNoteFragment"
             app:destination="@id/modifyNoteFragment" />
@@ -33,7 +34,7 @@
     <fragment
         android:id="@+id/noteOverviewFragment"
         android:name="com.gmaniliapp.notes.ui.note.overview.NoteOverviewFragment"
-        android:label="NoteOverviewFragment" >
+        android:label="NoteOverviewFragment">
         <action
             android:id="@+id/action_noteOverviewFragment_to_noteDetailFragment"
             app:destination="@id/noteDetailFragment" />

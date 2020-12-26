@@ -1,6 +1,6 @@
 package com.gmaniliapp.notes.data.remote.response
 
-import io.ktor.http.HttpStatusCode
+import io.ktor.http.*
 
 data class StandardResponse(
     val code: HttpStatusCode,

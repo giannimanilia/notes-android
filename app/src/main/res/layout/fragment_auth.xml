@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -57,9 +56,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="E-Mail"
-            android:textColorHint="@android:color/tertiary_text_light"
             android:inputType="textEmailAddress"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:textColorHint="@android:color/tertiary_text_light" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,9 +77,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Password"
-            android:textColorHint="@android:color/tertiary_text_light"
             android:inputType="textPassword"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:textColorHint="@android:color/tertiary_text_light" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,8 +160,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:alpha="0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -171,10 +170,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="E-Mail"
-            android:textColorHint="@android:color/tertiary_text_light"
             android:inputType="textEmailAddress"
             android:padding="16dp"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/tertiary_text_light" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -184,8 +183,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:alpha="0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle">
 
         <EditText
@@ -194,10 +193,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Password"
-            android:textColorHint="@android:color/tertiary_text_light"
             android:inputType="textPassword"
             android:padding="16dp"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/tertiary_text_light" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -207,8 +206,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:alpha="0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -217,10 +216,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Confirm Password"
-            android:textColorHint="@android:color/tertiary_text_light"
             android:inputType="textPassword"
             android:padding="16dp"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/tertiary_text_light" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -229,9 +228,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:alpha="0"
         android:text="Register"
         android:textColorHint="@android:color/tertiary_text_light"
-        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle" />
 
