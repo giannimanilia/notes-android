@@ -13,7 +13,6 @@
         android:hint="E-Mail"
         android:inputType="textEmailAddress"
         android:padding="16dp"
-        android:textColor="@android:color/white"
         android:textColorHint="@android:color/tertiary_text_light" />
 
 </com.google.android.material.textfield.TextInputLayout>

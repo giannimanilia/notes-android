@@ -10,7 +10,6 @@
         android:id="@+id/loginContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/mediumDarkBackground"
         app:layout_constraintBottom_toTopOf="@id/registerContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,21 +25,6 @@
             app:layout_constraintRight_toRightOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/tvLoginTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:alpha="1"
-        android:text="Login with an existing Account"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@id/tilLoginEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilLoginEmail"
         android:layout_width="0dp"
@@ -54,11 +38,8 @@
             android:id="@+id/etLoginEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:hint="E-Mail"
-            android:inputType="textEmailAddress"
-            android:padding="16dp"
-            android:textColorHint="@android:color/tertiary_text_light" />
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,11 +56,8 @@
             android:id="@+id/etLoginPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="16dp"
-            android:textColorHint="@android:color/tertiary_text_light" />
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,7 +106,6 @@
         android:layout_height="wrap_content"
         android:text="Not a member yet?\nSwipe up to register!"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/ivArrowUpLeft"
         app:layout_constraintEnd_toStartOf="@id/ivArrowUpRight"
@@ -144,39 +121,24 @@
         app:layout_constraintEnd_toEndOf="@id/registerContainer"
         app:layout_constraintTop_toTopOf="@id/registerContainer" />
 
-    <TextView
-        android:id="@+id/tvRegisterTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:text="Register a new Account"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="26sp"
-        app:layout_constraintTop_toBottomOf="parent" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilRegisterEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:alpha="0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etRegisterEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:hint="E-Mail"
-            android:inputType="textEmailAddress"
-            android:padding="16dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/tertiary_text_light" />
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilRegisterPassword"
@@ -185,21 +147,16 @@
         android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle">
+        app:layout_constraintTop_toBottomOf="@id/tilRegisterEmail">
 
         <EditText
             android:id="@+id/etRegisterPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="16dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/tertiary_text_light" />
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilRegisterPasswordConfirm"
@@ -208,18 +165,14 @@
         android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle">
+        app:layout_constraintTop_toBottomOf="@id/tilRegisterPassword">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etRegisterPasswordConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:padding="16dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/tertiary_text_light" />
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -230,9 +183,8 @@
         android:layout_marginTop="16dp"
         android:alpha="0"
         android:text="Register"
-        android:textColorHint="@android:color/tertiary_text_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle" />
+        app:layout_constraintTop_toBottomOf="@id/tilRegisterPasswordConfirm" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
