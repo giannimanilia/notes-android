@@ -2,8 +2,27 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/authFragment">
+    app:startDestination="@id/loginFragment">
 
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.gmaniliapp.notes.ui.login.LoginFragment"
+        android:label="LoginFragment">
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_noteOverviewFragment"
+            app:destination="@id/noteOverviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.gmaniliapp.notes.ui.registration.RegistrationFragment"
+        android:label="RegistrationFragment">
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/modifyNoteFragment"
         android:name="com.gmaniliapp.notes.ui.note.modify.ModifyNoteFragment"
@@ -11,14 +30,6 @@
         <argument
             android:name="id"
             app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/authFragment"
-        android:name="com.gmaniliapp.notes.ui.auth.AuthFragment"
-        android:label="AuthFragment">
-        <action
-            android:id="@+id/action_authFragment_to_noteOverviewFragment"
-            app:destination="@id/noteOverviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteDetailFragment"
@@ -43,6 +54,6 @@
             app:destination="@id/modifyNoteFragment" />
         <action
             android:id="@+id/action_noteOverviewFragment_to_authFragment"
-            app:destination="@id/authFragment" />
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>

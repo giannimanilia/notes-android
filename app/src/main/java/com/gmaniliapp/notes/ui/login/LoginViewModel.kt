@@ -1,4 +1,4 @@
-package com.gmaniliapp.notes.ui.auth
+package com.gmaniliapp.notes.ui.login
 
 import android.content.SharedPreferences
 import androidx.hilt.lifecycle.ViewModelInject
@@ -16,35 +16,17 @@ import com.gmaniliapp.notes.util.Resource
 import com.gmaniliapp.notes.util.Status
 import kotlinx.coroutines.launch
 
-
-class AuthViewModel @ViewModelInject constructor(
+class LoginViewModel @ViewModelInject constructor(
     private val repository: AuthRepository,
     private val sharedPreferences: SharedPreferences,
     private val basicAuthInterceptor: BasicAuthInterceptor
 ) : ViewModel() {
-
-    private val _registerStatus = MutableLiveData<Resource<String>>()
-    val registerStatus: LiveData<Resource<String>> = _registerStatus
 
     private val _loginStatus = MutableLiveData<Resource<String>>()
     val loginStatus: LiveData<Resource<String>> = _loginStatus
 
     private var currentEmail: String? = DEFAULT_NO_EMAIL
     private var currentPassword: String? = DEFAULT_NO_PASSWORD
-
-    fun register(email: String, password: String, repeatedPassword: String) {
-        _registerStatus.postValue(Resource.loading(null))
-
-        if (email.isBlank() || password.isBlank() || repeatedPassword.isBlank()) {
-            _registerStatus.postValue(Resource.error("Please fill out all the fields"))
-        } else if (password != repeatedPassword) {
-            _registerStatus.postValue(Resource.error("Passwords don't match"))
-        } else {
-            viewModelScope.launch {
-                _registerStatus.postValue(repository.register(email, password))
-            }
-        }
-    }
 
     fun login(email: String, password: String) {
         _loginStatus.postValue(Resource.loading(null))
