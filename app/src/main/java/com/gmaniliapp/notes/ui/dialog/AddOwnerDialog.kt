@@ -16,7 +16,7 @@ class AddOwnerDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val addOwnerEditText = LayoutInflater.from(requireContext()).inflate(
-            R.layout.edit_text_email,
+            R.layout.dialog_add_owner,
             clNoteContainer,
             false
         ) as TextInputLayout

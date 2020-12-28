@@ -16,7 +16,6 @@
             android:layout_weight="9"
             android:clickable="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
