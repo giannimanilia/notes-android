@@ -9,7 +9,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.gmaniliapp.notes.R
 import com.gmaniliapp.notes.ui.BaseFragment
-import com.gmaniliapp.notes.ui.login.LoginFragmentDirections
 import com.gmaniliapp.notes.util.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_registration.*
@@ -27,10 +26,20 @@ class RegistrationFragment : BaseFragment(R.layout.fragment_registration) {
         subscribeToObservers()
 
         btnRegister.setOnClickListener {
+            tilRegisterEmail.isErrorEnabled = false
+            tilRegisterPasswordConfirm.isErrorEnabled = false
+
             val email = etRegisterEmail.text.toString()
             val password = etRegisterPassword.text.toString()
             val repeatedPassword = etRegisterPasswordConfirm.text.toString()
-            viewModel.register(email, password, repeatedPassword)
+
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                tilRegisterEmail.error = "Invalid email"
+            } else if (password != repeatedPassword) {
+                tilRegisterPasswordConfirm.error = "Passwords don't match"
+            } else {
+                viewModel.register(email, password, repeatedPassword)
+            }
         }
     }
 
