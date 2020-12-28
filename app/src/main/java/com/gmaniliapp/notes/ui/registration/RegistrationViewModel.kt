@@ -21,6 +21,8 @@ class RegistrationViewModel @ViewModelInject constructor(
 
         if (email.isBlank() || password.isBlank() || repeatedPassword.isBlank()) {
             _registerStatus.postValue(Resource.error("Please fill out all the fields"))
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            _registerStatus.postValue(Resource.error("Please insert a valid email"))
         } else if (password != repeatedPassword) {
             _registerStatus.postValue(Resource.error("Passwords don't match"))
         } else {
